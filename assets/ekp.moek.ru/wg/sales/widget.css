@@ -1,0 +1,1034 @@
+@font-face {
+  font-family: Manrope;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url("fonts/manrope-cyrillic-ext-500-normal.woff2") format("woff2");
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+@font-face {
+  font-family: Manrope;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url("fonts/manrope-cyrillic-500-normal.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: Manrope;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url("fonts/manrope-latin-ext-500-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: Manrope;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 500;
+  src: url("fonts/manrope-latin-500-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: Manrope;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("fonts/manrope-cyrillic-ext-700-normal.woff2") format("woff2");
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+
+@font-face {
+  font-family: Manrope;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("fonts/manrope-cyrillic-700-normal.woff2") format("woff2");
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: Manrope;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("fonts/manrope-latin-ext-700-normal.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+    U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: Manrope;
+  font-style: normal;
+  font-display: swap;
+  font-weight: 700;
+  src: url("fonts/manrope-latin-700-normal.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* Токены как на сайте / UI-kit (dist: jquery.css :root + ui-kit.css); при отсутствии — запасные значения */
+.branch-finder {
+  --bf-font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  /* Только кнопка «Найти»: Roboto Regular (подключите Roboto на странице при необходимости). */
+  --bf-button-font-family: Roboto, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --bf-error-font: "Manrope", var(--bf-font-family);
+  --bf-max-width: min(100%, 340px);
+  --bf-card-padding: 0;
+  --bf-radius-sm: var(--btn-radius, 8px);
+  /* Карточки виджета: поиск, статус, таблица, карта */
+  --bf-radius: var(--b-radius, 12px);
+  --bf-map-inset-inline: 32px;
+  --bf-map-inset-block-start: 32px;
+  --bf-map-inset-block-end: 32px;
+  --bf-search-wrap-radius: 10px;
+  --bf-search-radius-idle: 8px;
+  --bf-search-radius-focus: 12px;
+  --bf-map-height: clamp(300px, min(52svh, 520px), 560px);
+  --bf-section-gap: 2px;
+  --bf-search-stack-gap: 32px;
+  --bf-search-wrap-padding-block: 32px;
+  --bf-search-wrap-padding-inline: 32px;
+  --bf-content-error-padding-block: 32px;
+  --bf-content-error-padding-inline: 32px;
+  --bf-content-error-line-height: 26px;
+
+  --bf-color-text: var(--black, #0f0f0f);
+  --bf-color-muted: var(--gray, #8095b7);
+  --bf-placeholder: var(--gray, #8095b7);
+  --bf-color-primary: var(--b-blue, #0072bb);
+  --bf-color-primary-hover: var(--dark-blue, #0a6ca6);
+  --bf-color-button: var(--m-blue, #005dc7);
+  --bf-color-on-primary: var(--white, #ffffff);
+  --bf-color-error: var(--a-coral, var(--error, #ff5534));
+  --bf-font-size-body: 18px;
+  --bf-line-body: 28px;
+  --bf-font-size-subtitle: 16px;
+  --bf-line-subtitle: 26px;
+  --bf-font-size-caption: 14px;
+  --bf-line-caption: 20px;
+  --bf-font-size-micro: 12px;
+  --bf-color-border: var(--gray-twenty, rgba(128, 149, 183, 0.2));
+  --bf-surface: var(--white, #ffffff);
+  --bf-surface-card: var(--bg-gray, #f0f5f7);
+  --bf-surface-hover: var(--o-light-blue, #eff5fb);
+  --bf-page-bg: var(--bg-gray, #f0f5f7);
+  --bf-shell-bg: transparent;
+  --bf-panel-bg: var(--white, #ffffff);
+  --bf-panel-shadow: 0 4px 24px rgba(15, 23, 42, 0.07), 0 1px 3px rgba(15, 23, 42, 0.04);
+  --bf-panel-padding: 20px;
+  --bf-card-bg: var(--bf-surface-card);
+  --bf-card-shadow: var(--bf-panel-shadow);
+  --bf-focus-ring: color-mix(in srgb, var(--b-blue, #0072bb) 35%, transparent);
+
+  --t396-speedhover: 0.3s;
+  --t396-shadowshoverspeed: 0.2s;
+  --t396-bgcolor-color: transparent;
+  --t396-bgcolor-image: var(
+    --c-g-blue,
+    linear-gradient(0.295turn, rgba(0, 93, 199, 1) 0%, rgba(51, 132, 224, 1) 100%)
+  );
+  --t396-bgcolor-hover-color: transparent;
+  --t396-bgcolor-hover-image: var(
+    --c-g-light-blue,
+    linear-gradient(0.249turn, rgba(0, 134, 225, 1) 0%, rgba(70, 180, 255, 1) 100%)
+  );
+  --bf-button-hover-fade: var(--t396-speedhover);
+
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  max-width: var(--bf-max-width);
+  margin-inline: auto;
+  padding: var(--bf-card-padding);
+  border: none;
+  border-radius: 0;
+  background: var(--bf-shell-bg);
+  box-shadow: none;
+  font-family: var(--bf-font-family);
+  font-size: var(--bf-font-size-body);
+  font-weight: 400;
+  line-height: var(--bf-line-body);
+  color: var(--bf-color-text);
+  overflow: visible;
+}
+
+.branch-finder[data-branch-finder] {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  row-gap: var(--bf-section-gap);
+  column-gap: 0;
+  min-height: 0;
+  overflow: visible;
+}
+
+.branch-finder *,
+.branch-finder *::before,
+.branch-finder *::after {
+  box-sizing: border-box;
+}
+
+.branch-finder--embed,
+.branch-finder.branch-finder--embed {
+  --bf-card-bg: transparent;
+  --bf-card-shadow: none;
+  --bf-panel-shadow: none;
+}
+
+@media (min-width: 768px) {
+  .branch-finder:not(.branch-finder--wide) {
+    --bf-max-width: min(100%, 688px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .branch-finder:not(.branch-finder--wide) {
+    --bf-max-width: min(100%, 944px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .branch-finder:not(.branch-finder--wide) {
+    --bf-max-width: min(100%, 1120px);
+  }
+}
+
+@media (min-width: 1440px) {
+  .branch-finder:not(.branch-finder--wide) {
+    --bf-max-width: min(100%, 1334px);
+  }
+}
+
+.branch-finder--wide,
+.branch-finder.branch-finder--wide {
+  --bf-max-width: none;
+  max-width: none;
+}
+
+/* Секция поиска: та же ширина, что у .branch-finder__section--main / .branch-finder__content */
+.branch-finder__section--search {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Внешняя карточка блока поиска (макет 1336×120, padding 32px, radius 10px) */
+.branch-finder__search-wrap {
+  box-sizing: border-box;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--bf-search-stack-gap);
+  min-width: 0;
+  padding: var(--bf-search-wrap-padding-block) var(--bf-search-wrap-padding-inline);
+  background: var(--bf-surface);
+  border: none;
+  border-radius: var(--bf-search-wrap-radius);
+}
+
+/* Поле + «Найти»: общий инсет с картой. ≥768 — одна серая капсула на .search-line; <768 — серая только .search-shell, кнопка снаружи */
+.branch-finder__search-line {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 4px;
+  position: relative;
+  width: calc(100% + 2 * (var(--bf-search-wrap-padding-inline) - var(--bf-map-inset-inline)));
+  max-width: none;
+  margin-inline: calc(var(--bf-map-inset-inline) - var(--bf-search-wrap-padding-inline));
+  min-width: 0;
+  /* 56 снаружи: 48 внутрь + 4+4 паддинги; место до кнопки/поля по периметру */
+  height: 56px;
+  min-height: 56px;
+  max-height: 56px;
+  padding: 4px;
+  background: var(--bf-surface-card);
+  border: none;
+  border-radius: var(--bf-search-radius-idle);
+  transition: background-color 0.2s ease, box-shadow 0.2s ease,
+    border-radius 0.2s ease;
+}
+
+.branch-finder__search-line:has(.branch-finder__input:hover:not(:focus)) {
+  background: var(--b-light-blue, #e2ebf6);
+}
+
+.branch-finder__search-line:focus-within {
+  background: var(--bf-surface);
+  border-radius: var(--bf-search-radius-focus);
+  /* обводка без border: высота блока по макету 56px (не добавляются пиксели рамки) */
+  box-shadow:
+    0 0 0 1px #8095b7,
+    0 1px 3px var(--gray-twenty, rgba(128, 149, 183, 0.15));
+}
+
+.branch-finder__search-line:focus-within .branch-finder__search-inner {
+  padding: 0;
+}
+
+.branch-finder__search-shell {
+  box-sizing: border-box;
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.branch-finder__search-inner {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  /* высоту задаёт капсула − 8px; без доп. паддингов, отступы 4 только у .search-line */
+  padding: 0;
+  transition: none;
+  position: relative;
+}
+
+.branch-finder__section--search .branch-finder__status:not(:empty) {
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.branch-finder__search-inner .branch-finder__label.branch-finder__search-bar {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  align-self: stretch;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: text;
+}
+
+.branch-finder__search-inner .branch-finder__search-controls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.branch-finder__search-inner .branch-finder__search-bar .branch-finder__field {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+}
+
+.branch-finder__search-line > .branch-finder__suggest {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 5;
+  display: none;
+}
+
+.branch-finder__suggest {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 5;
+  display: none;
+}
+
+.branch-finder__suggest-list {
+  background: var(--bf-surface);
+  border: 1px solid var(--bf-color-border);
+  border-radius: var(--bf-radius);
+  overflow: hidden;
+  box-shadow: none;
+}
+
+.branch-finder__suggest-item {
+  width: 100%;
+  text-align: left;
+  padding: 14px 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: var(--bf-font-size-caption);
+  font-weight: 500;
+  line-height: var(--bf-line-caption);
+  color: var(--bf-color-text);
+  transition: background 0.2s ease;
+}
+
+.branch-finder__suggest-hl {
+  background: color-mix(in srgb, var(--bf-color-primary) 22%, transparent);
+  color: inherit;
+  font-weight: 600;
+  border-radius: 3px;
+  padding: 0 2px;
+  margin: 0 -1px;
+}
+
+.branch-finder__suggest-item:hover,
+.branch-finder__suggest-item:focus {
+  outline: none;
+  background: var(--bf-surface-hover);
+}
+
+.branch-finder__label {
+  flex: 1 1 200px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+}
+
+.branch-finder__label-text {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--bf-color-text);
+  display: none;
+}
+
+.branch-finder__search-inner .branch-finder__field::before {
+  content: "";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  background: transparent url("loupe.svg") center / contain no-repeat;
+}
+
+.branch-finder__search-line:focus-within .branch-finder__field::before {
+  display: none;
+}
+
+.branch-finder__field {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.branch-finder__input {
+  width: 100%;
+  min-height: 0;
+  /* высота дорожки 48 (= 56 − паддинги капсулы 4+4); line-height 22 → (48−22)/2 = 13 */
+  height: 48px;
+  /* слева место под лупу, в фокусе сбрасывается правилом ниже */
+  padding: 13px 16px 13px 44px;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background: transparent;
+  /* Типографика строки поиска по макету (ввод + placeholder) */
+  font-family: var(--bf-font-family);
+  font-style: normal;
+  font-weight: 500; /* Medium */
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0;
+  leading-trim: none; 
+  font-variant-numeric: lining-nums proportional-nums; 
+  color: var(--bf-color-text);
+  cursor: text;
+  transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease,
+    color 0.15s ease, padding 0.2s ease;
+}
+
+.branch-finder__input::placeholder {
+  color: var(--bf-placeholder); /* серый из токена; остальное наследует .branch-finder__input */
+  font: inherit;
+  letter-spacing: inherit;
+  font-variant-numeric: inherit;
+}
+
+.branch-finder__input:focus {
+  outline: none;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  /* активное состояние: бледнее основного текста макета */
+  color: #677188;
+}
+
+.branch-finder__input:focus::placeholder {
+  color: #677188;
+}
+
+.branch-finder__search-line:focus-within .branch-finder__input {
+  padding-top: 13px;
+  padding-bottom: 13px;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.branch-finder__search-line:focus-within .branch-finder__field:has(.branch-finder__clear:not([hidden])) .branch-finder__input {
+  padding-right: 44px;
+}
+
+.branch-finder__field:has(.branch-finder__clear:not([hidden])) .branch-finder__input {
+  padding-right: 44px;
+}
+
+.branch-finder__clear {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: var(--bf-radius-sm);
+  background: transparent;
+  color: var(--bf-color-muted);
+  font-size: 1.375rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.branch-finder__clear:hover,
+.branch-finder__clear:focus {
+  color: var(--bf-color-text);
+  background: var(--bf-surface-hover);
+  outline: none;
+}
+
+.branch-finder__clear[hidden] {
+  display: none !important;
+}
+
+.branch-finder__button {
+  isolation: isolate;
+  position: relative;
+  z-index: 1;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: min(140px, 100%);
+  overflow: hidden;
+  padding: 0 28px;
+  min-height: 56px;
+  background-color: var(--t396-bgcolor-color);
+  background-image: var(--t396-bgcolor-image);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  color: var(--bf-color-on-primary);
+  font-family: var(--bf-button-font-family);
+  font-size: var(--bf-font-size-body);
+  font-weight: 400;
+  line-height: var(--bf-line-body);
+  border: none;
+  border-radius: var(--bf-radius-sm);
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0.1);
+  text-align: center;
+  transition: background-color var(--t396-speedhover, 0s) ease-in-out,
+    color var(--t396-speedhover, 0s) ease-in-out,
+    border-color var(--t396-speedhover, 0s) ease-in-out,
+    box-shadow var(--t396-shadowshoverspeed, 0.2s) ease-in-out;
+}
+
+.branch-finder__button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background-color: var(--t396-bgcolor-hover-color);
+  background-image: var(--t396-bgcolor-hover-image);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  opacity: 0;
+  transition: opacity var(--bf-button-hover-fade, var(--t396-speedhover, 0.3s)) ease-in-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.branch-finder__button-label {
+  position: relative;
+  z-index: 1;
+}
+
+@media screen and (max-width: 1023px) {
+  @media (hover) {
+    .branch-finder__button:hover:not(:disabled)::before {
+      opacity: 1;
+      transition: opacity var(--bf-button-hover-fade, var(--t396-speedhover, 0.3s)) ease-in-out
+        var(--t396-speedhover, 0s);
+    }
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .branch-finder__button:hover:not(:disabled)::before {
+    opacity: 1;
+    transition: opacity var(--bf-button-hover-fade, var(--t396-speedhover, 0.3s)) ease-in-out;
+  }
+}
+
+.branch-finder__button:disabled {
+  cursor: not-allowed;
+}
+
+.branch-finder__button.branch-finder__button--in-search {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  align-self: center;
+  width: 113px;
+  min-width: 42px;
+  max-width: 100%;
+  height: 48px;
+  min-height: 48px;
+  margin: 0;
+  padding: 8px 32px;
+  gap: 8px;
+  border-radius: 8px;
+  border-left: none;
+  font-size: 14px;
+  line-height: 22px;
+  font-weight: 400;
+}
+
+.branch-finder__status {
+  margin: 0;
+  min-width: 0;
+  padding: 16px 20px;
+  border-radius: var(--bf-radius);
+  border: 1px solid transparent;
+}
+
+.branch-finder__status:empty {
+  display: none;
+}
+
+.branch-finder__status-title {
+  font-weight: 600;
+  font-size: var(--bf-font-size-subtitle);
+  line-height: var(--bf-line-subtitle);
+}
+
+.branch-finder__status-details {
+  margin-top: 8px;
+  font-size: var(--bf-font-size-caption);
+  line-height: var(--bf-line-caption);
+  color: var(--dark-gray, #677188);
+}
+
+.branch-finder__status--info {
+  background: var(--bf-surface);
+  border-color: var(--bf-color-border);
+  color: var(--bf-color-text);
+}
+
+.branch-finder__status--info .branch-finder__status-details {
+  color: var(--dark-gray, #677188);
+}
+
+/* Основная карточка: ошибка / таблица и карта в одном контейнере (см. макет). */
+.branch-finder__section--main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.branch-finder__content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: none;
+  border-radius: var(--bf-radius);
+  background: var(--bf-surface);
+  box-shadow: none;
+  overflow: hidden;
+}
+
+.branch-finder__content-error:not([hidden]) {
+  flex-shrink: 0;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: calc(
+    var(--bf-content-error-padding-block, 32px) * 2 + var(--bf-content-error-line-height, 26px)
+  );
+  padding: var(--bf-content-error-padding-block, 32px) var(--bf-content-error-padding-inline, 32px);
+  font-family: var(--bf-error-font);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: var(--bf-content-error-line-height, 26px);
+  color: #ff5534;
+  white-space: pre-line;
+  text-align: start;
+}
+
+.branch-finder__content > .branch-finder__result {
+  box-sizing: border-box;
+  width: calc(100% - (var(--bf-map-inset-inline) * 2));
+  max-width: calc(100% - (var(--bf-map-inset-inline) * 2));
+  margin-block: 0;
+  margin-inline: auto;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  background: var(--bf-surface);
+  box-shadow: none;
+  overflow-x: auto;
+  overflow-y: visible;
+  -webkit-overflow-scrolling: touch;
+  flex-shrink: 0;
+}
+
+.branch-finder__result-table {
+  width: 100%;
+  min-width: min(680px, 100%);
+  overflow: visible;
+}
+
+.branch-finder__result-caption {
+  margin: 0;
+  padding: 16px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 14px;
+  font-family: var(--bf-font-family);
+}
+
+.branch-finder__result-caption-text {
+  font-family: var(--bf-font-family);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  leading-trim: none;
+  font-variant-numeric: lining-nums proportional-nums;
+  color: #677188;
+}
+
+.branch-finder__result-caption-addr {
+  display: inline-block;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--bf-font-family);
+  font-style: normal; /* Semi Bold → weight 600 */
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  leading-trim: none;
+  font-variant-numeric: lining-nums proportional-nums;
+  color: #677188;
+  word-break: break-word;
+}
+
+.branch-finder__result-head,
+.branch-finder__result-row {
+  display: grid;
+  grid-template-columns:
+    minmax(4.5rem, 6.5rem)
+    minmax(7.5rem, 11rem)
+    minmax(0, 1.2fr)
+    minmax(0, 1fr);
+  gap: 16px 20px;
+  align-items: start;
+}
+
+.branch-finder__result-head {
+  padding: 16px 24px;
+  background: transparent;
+  border-bottom: 1px solid var(--bf-color-border);
+  font-family: var(--bf-font-family);
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+  leading-trim: none;
+  font-variant-numeric: lining-nums proportional-nums;
+  color: #677188;
+}
+
+.branch-finder__result-th {
+  font-weight: 400;
+}
+
+.branch-finder__result-body {
+  padding: 8px 24px 20px;
+}
+
+.branch-finder__result-row {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--bf-color-border);
+}
+
+.branch-finder__result-row:last-child {
+  border-bottom: none;
+}
+
+.branch-finder__result-td {
+  font-family: var(--bf-font-family);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0;
+  leading-trim: none;
+  font-variant-numeric: lining-nums proportional-nums;
+  color: #0f0f0f;
+  word-break: break-word;
+}
+
+.branch-finder__strong {
+  font-weight: 600;
+}
+
+.branch-finder__small {
+  margin-top: 6px;
+  font-size: var(--bf-font-size-caption);
+  line-height: var(--bf-line-caption);
+  font-weight: 400;
+  color: var(--bf-color-muted);
+}
+
+.branch-finder__muted {
+  color: var(--bf-color-muted);
+}
+
+/* Карта — внутри белой карточки с отступами и скруглением (как отдельная вложенная плитка) */
+.branch-finder__content .branch-finder__map {
+  display: block;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  height: var(--bf-map-height);
+  min-height: 280px;
+  width: calc(100% - (var(--bf-map-inset-inline) * 2));
+  max-width: calc(100% - (var(--bf-map-inset-inline) * 2));
+  margin: var(--bf-map-inset-block-start) auto var(--bf-map-inset-block-end);
+  background: var(--bf-panel-bg);
+  border: none;
+  border-radius: var(--bf-radius) !important;
+  overflow: hidden;
+  box-shadow: none;
+  filter: none;
+  min-width: 0;
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+/* Ошибка над картой: зазор «текст — карта» только за счёт padding блока ошибки, без двойного margin у карты */
+.branch-finder__content:has(> .branch-finder__content-error:not([hidden])) .branch-finder__map {
+  margin-top: 0;
+}
+
+/* Мобильная вёрстка таблицы: до планшетного брейкпоинта 768 */
+@media (max-width: 767px) {
+  .branch-finder:not(.branch-finder--wide) {
+    width: 100%;
+    max-width: min(340px, 100%);
+    margin-inline: auto;
+  }
+
+  .branch-finder {
+    --bf-map-inset-inline: 15px;
+    --bf-map-inset-block-start: 15px;
+    --bf-map-inset-block-end: 20px;
+    --bf-search-stack-gap: 15px;
+    --bf-search-wrap-padding-block: 20px;
+    --bf-search-wrap-padding-inline: 15px;
+    --bf-content-error-padding-block: 20px;
+    --bf-content-error-padding-inline: 15px;
+  }
+
+  .branch-finder[data-branch-finder] {
+    row-gap: 0;
+  }
+
+  .branch-finder__search-wrap {
+    border-radius: var(--bf-search-wrap-radius) var(--bf-search-wrap-radius) 0 0;
+  }
+
+  .branch-finder__content {
+    border-radius: 0 0 var(--bf-search-wrap-radius) var(--bf-search-wrap-radius);
+  }
+
+  .branch-finder__content .branch-finder__map {
+    border-radius: 0 !important;
+  }
+
+  /* Поиск: на мобильных только поле; отправка — Enter или выбор из подсказок */
+  .branch-finder__search-line {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 0;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    transition: none;
+  }
+
+  .branch-finder__search-line:has(.branch-finder__input:hover:not(:focus)) {
+    background: transparent;
+  }
+
+  .branch-finder__search-line:focus-within {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .branch-finder__search-line:focus-within .branch-finder__search-inner {
+    padding: 4px;
+  }
+
+  .branch-finder__search-shell {
+    flex: 0 0 auto;
+    width: 100%;
+    background: var(--bf-surface-card);
+    border: 1px solid transparent;
+    border-radius: var(--bf-search-radius-idle);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease,
+      border-radius 0.2s ease;
+  }
+
+  .branch-finder__search-shell:has(.branch-finder__input:hover:not(:focus)) {
+    background: var(--b-light-blue, #e2ebf6);
+  }
+
+  .branch-finder__search-shell:focus-within {
+    background: var(--bf-surface);
+    border: 1px solid #8095b7;
+    border-radius: var(--bf-search-radius-focus);
+    box-shadow: 0 1px 3px var(--gray-twenty, rgba(128, 149, 183, 0.15));
+  }
+
+  .branch-finder__search-shell:focus-within .branch-finder__search-inner {
+    padding: 4px;
+  }
+
+  .branch-finder__search-inner {
+    height: auto;
+    min-height: 0;
+    padding: 4px;
+  }
+
+  .branch-finder__search-line > .branch-finder__button.branch-finder__button--in-search {
+    display: none !important;
+  }
+
+  .branch-finder__result-head {
+    display: none;
+  }
+
+  .branch-finder__result-table {
+    min-width: 0;
+  }
+
+  .branch-finder__result-caption {
+    padding: 15px 15px;
+    gap: 10px 12px;
+  }
+
+  .branch-finder__result-body {
+    padding: 12px 15px 20px;
+  }
+
+  .branch-finder__result-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--bf-color-border);
+  }
+
+  .branch-finder__result-row:last-child {
+    border-bottom: none;
+  }
+
+  .branch-finder__result-td {
+    padding: 0;
+  }
+
+  .branch-finder__result-td::before {
+    display: block;
+    font-size: var(--bf-font-size-micro);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--bf-color-muted);
+    margin-bottom: 6px;
+    line-height: 1.25;
+  }
+
+  .branch-finder__result-td:nth-child(1)::before {
+    content: "№ отделения";
+  }
+
+  .branch-finder__result-td:nth-child(2)::before {
+    content: "Административный округ";
+  }
+
+  .branch-finder__result-td:nth-child(3)::before {
+    content: "Адрес";
+  }
+
+  .branch-finder__result-td:nth-child(4)::before {
+    content: "Руководство";
+  }
+}

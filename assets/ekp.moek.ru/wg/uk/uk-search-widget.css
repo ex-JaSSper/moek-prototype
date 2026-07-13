@@ -1,0 +1,1744 @@
+/* Шрифты из ./fonts/ (на сервере: /wg/uk/fonts/) */
+@font-face {
+  font-family: Inter;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("fonts/Inter-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: Inter;
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  src: url("fonts/Inter-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: Inter;
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+  src: url("fonts/inter-semi-bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: Manrope;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("fonts/Manrope-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: Roboto;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("fonts/Roboto-Regular.woff") format("woff");
+}
+
+/*
+ *
+ * .uk-widget - корневой контейнер и набор дизайн-токенов виджета.
+ * .uk-widget--no-heading - режим без заголовка, убираем лишний вертикальный зазор.
+ * .uk-widget--has-value - адрес уже введен, переключаем оформление строки поиска.
+ * .uk-widget--no-leading - вариант без левого "Поиск"/иконки у инпута.
+ *
+ * .uk-widget__section--search - верхняя секция: заголовок + строка поиска + выпадашка.
+ * .uk-widget__search-wrap - белая карточка вокруг поискового блока.
+ * .uk-widget__search-top - вертикальная группа (title + row), ограничение по ширине.
+ * .uk-widget__heading - крупный заголовок "Узнать свою УК...".
+ *
+ * .uk-widget__search-row - основной контейнер строки поиска.
+ * .uk-widget__search-shell - оболочка текстового поля (левая часть строки).
+ * .uk-widget__search-inner - внутренняя обертка label/input.
+ * .uk-widget__search-leading - левый лидинг-блок (иконка + слово "Поиск").
+ * .uk-widget__search-leading-icon - контейнер иконки лупы.
+ * .uk-widget__search-leading-svg - SVG лупы.
+ * .uk-widget__search-leading-text - подпись "Поиск".
+ *
+ * .uk-widget__label.uk-widget__search-bar - label, оборачивающий поисковое поле.
+ * .uk-widget__label-text - служебная подпись поля (скрыта визуально).
+ * .uk-widget__search-controls - обертка для контрола внутри label.
+ * .uk-widget__split - внутренний flex-слой под поле.
+ * .uk-widget__field - базовая обертка для инпута.
+ * .uk-widget__field--address - конкретно адресное поле.
+ * .uk-widget__input - текстовый input адреса.
+ *
+ * .uk-widget__search-actions - правая зона кнопок (clear + primary/secondary).
+ * .uk-widget__clear - крестик очистки поля.
+ * .uk-widget__button - базовый стиль кнопок.
+ * .uk-widget__button--primary - кнопка "Найти".
+ * .uk-widget__button--secondary - опциональная вторичная кнопка.
+ * .uk-widget__button-label - текст внутри кнопки.
+ *
+ * .uk-widget__section--main - зона результата под поиском.
+ * .uk-widget__content - обертка контента результатов/ошибок.
+ * .uk-widget__error - текст системной ошибки (не "ничего не найдено").
+ * .uk-widget__result - контейнер карточек найденной УК.
+ *
+ * .uk-widget__suggest - контейнер выпадающего списка подсказок.
+ * .uk-widget__suggest-list - список подсказок.
+ * .uk-widget__suggest-list--empty - компактный список для состояния "ничего не найдено".
+ * .uk-widget__suggest-item - один вариант адреса в подсказках.
+ * .uk-widget__suggest-item--active - активный вариант (hover/keyboard).
+ * .uk-widget__suggest-empty - строка-плашка "ничего не найдено".
+ * .uk-widget__suggest-empty-text - типографика текста внутри empty-строки.
+ * .uk-widget__highlight - подсветка совпавшего фрагмента адреса.
+ *
+ * .uk-widget__uk-card - внешняя обертка карточки найденной УК.
+ * .uk-widget__uk-card-inner - внутренняя подложка/отступы карточки.
+ * .uk-widget__uk-stack - вертикальный список секций УК в одной карточке.
+ * .uk-widget__uk-block - одна УК: название + таблица.
+ * .uk-widget__uk-section-divider - разделитель между секциями УК.
+ * .uk-widget__uk-kicker - подпись «Вас обслуживает/обслуживают УК».
+ * .uk-widget__uk-name - название управляющей компании.
+ * .uk-widget__uk-table - таблица данных карточки.
+ * .uk-widget__uk-table-head - строка заголовков таблицы.
+ * .uk-widget__uk-th - заголовок колонки.
+ * .uk-widget__uk-divider - разделитель между head и body таблицы.
+ * .uk-widget__uk-table-row - строка со значениями.
+ * .uk-widget__uk-cell - базовая ячейка значения.
+ * .uk-widget__uk-cell--contacts - ячейка "телефон / email".
+ * .uk-widget__uk-cell--management - ячейка "руководство".
+ * .uk-widget__uk-cell-value - текст/ссылка значения внутри ячейки.
+ * .uk-widget__uk-cell-link - ссылка (tel/mail) в карточке.
+ * .uk-widget__uk-email - ссылка email (подчёркивание, #0A6CA6).
+ */
+
+.uk-widget {
+  --ukw-font: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --ukw-heading-font: Manrope, Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --ukw-btn-font: Roboto, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --ukw-text: #0f0f0f;
+  --ukw-muted: #677188;
+  --ukw-muted-soft: #8095b7;
+  --ukw-border-search: #8095b7;
+  --ukw-secondary-border: rgba(128, 149, 183, 0.5);
+  --ukw-border: rgba(128, 149, 183, 0.2);
+  --ukw-surface: #ffffff;
+  --ukw-surface-muted: #f0f5f7;
+  --ukw-surface-hover: #eff5fb;
+  --ukw-blue: #0072bb;
+  --ukw-btn-start: #005dc7;
+  --ukw-btn-end: #3384e0;
+  --ukw-btn-hover-start: #0086e1;
+  --ukw-btn-hover-end: #46b4ff;
+  --ukw-radius-wrap: 10px;
+  --ukw-radius-field: 8px;
+  --ukw-radius-field-focus: 12px;
+  --ukw-radius-card: 12px;
+  --ukw-card-max: 994px;
+  --ukw-pad-inline: 32px;
+  --ukw-pad-block: 32px;
+  --ukw-primary: #0e73c8;
+  --ukw-primary-hover: #0a66b0;
+  --ukw-error: #ff5534;
+  --ukw-card-shadow: 0 1px 19.5px rgba(29, 29, 29, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(100%, var(--ukw-card-max));
+  margin-inline: auto;
+  font-family: var(--ukw-font);
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--ukw-text);
+}
+
+.uk-widget *,
+.uk-widget *::before,
+.uk-widget *::after {
+  box-sizing: border-box;
+}
+
+.uk-widget__section--search {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.uk-widget__search-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  padding: var(--ukw-pad-block) var(--ukw-pad-inline);
+  background: var(--ukw-surface);
+  border-radius: var(--ukw-radius-wrap);
+  box-shadow: var(--ukw-card-shadow);
+  overflow: visible;
+}
+
+.uk-widget__search-top {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: flex-end;
+  width: 100%;
+  max-width: 930px;
+  min-width: 0;
+}
+
+.uk-widget--no-heading .uk-widget__search-top {
+  gap: 0;
+}
+
+.uk-widget__heading {
+  margin: 0;
+  max-width: 100%;
+  font-family: var(--ukw-heading-font);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: var(--ukw-text);
+}
+
+.uk-widget__search-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 56px;
+  min-height: 56px;
+  max-height: 56px;
+  padding: 4px 4px 4px 16px;
+  background: var(--ukw-surface-muted);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: text;
+  transition: background-color 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .uk-widget__search-row:hover:not(:focus-within) {
+    background: #ffffff;
+    border-color: #8095b7;
+    border-radius: 12px;
+    box-shadow: none;
+  }
+}
+
+/* Активное состояние: адрес уже введен (без фокуса). */
+.uk-widget.uk-widget--has-value .uk-widget__search-row:not(:focus-within) {
+  background: #f0f5f7;
+  border-color: transparent;
+  border-radius: 12px;
+}
+
+.uk-widget.uk-widget--has-value .uk-widget__search-row:not(:focus-within) .uk-widget__search-shell {
+  width: 100%;
+  max-width: 775px;
+  margin: 0 auto;
+}
+
+.uk-widget.uk-widget--has-value .uk-widget__search-row:not(:focus-within) .uk-widget__search-leading {
+  display: none;
+}
+
+.uk-widget.uk-widget--has-value
+  .uk-widget__search-row:not(:focus-within)
+  .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)) {
+  gap: 10px;
+  width: 135px;
+  min-width: 135px;
+  flex: 0 0 135px;
+  height: 48px;
+  box-sizing: border-box;
+}
+
+.uk-widget.uk-widget--has-value
+  .uk-widget__search-row:not(:focus-within)
+  .uk-widget__search-actions:not(:has(.uk-widget__button--secondary))
+  .uk-widget__button--primary {
+  width: 105px;
+  min-width: 105px;
+  max-width: 105px;
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
+  box-sizing: border-box;
+}
+
+.uk-widget__search-row:focus-within {
+  background: var(--ukw-surface);
+  border-color: #8095b7;
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.uk-widget__search-row:focus-within .uk-widget__search-leading {
+  display: none;
+}
+
+.uk-widget__search-row:focus-within .uk-widget__search-inner {
+  padding: 0;
+  min-height: 48px;
+  max-height: 48px;
+  height: auto;
+  box-sizing: border-box;
+}
+
+.uk-widget__search-row:focus-within .uk-widget__search-shell {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.uk-widget__search-row:focus-within .uk-widget__input {
+  height: 54px;
+  min-height: 54px;
+  max-height: 54px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.uk-widget__search-leading {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  height: 40px;
+  min-height: 40px;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  border-radius: 20px;
+}
+
+.uk-widget__search-leading-icon {
+  position: relative;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  border-radius: 0;
+  background: transparent;
+}
+
+.uk-widget__search-leading-svg {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border: none;
+  outline: none;
+  shape-rendering: geometricPrecision;
+}
+
+.uk-widget__search-leading-text {
+  flex: 0 1 auto;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  font-family: var(--ukw-font);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: var(--ukw-muted);
+  white-space: nowrap;
+}
+
+.uk-widget__search-shell {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: visible;
+}
+
+.uk-widget__label.uk-widget__search-bar > .uk-widget__search-shell {
+  flex: 1 1 auto;
+}
+
+.uk-widget__search-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  min-height: 54px;
+  max-height: 54px;
+  height: 54px;
+  padding: 0 4px;
+  box-sizing: border-box;
+  transition: none;
+  position: relative;
+}
+
+.uk-widget__label.uk-widget__search-bar {
+  flex: 1 1 auto;
+  min-width: 0;
+  align-self: stretch;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  cursor: text;
+}
+
+.uk-widget__label-text {
+  display: none;
+}
+
+.uk-widget__search-controls {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+}
+
+.uk-widget__split {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+}
+
+.uk-widget__field {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.uk-widget__field--address {
+  flex: 1 1 auto;
+}
+
+.uk-widget:not(.uk-widget--no-leading) .uk-widget__field--address::before {
+  display: none;
+}
+
+.uk-widget--no-leading .uk-widget__field--address::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 24 24'%3E%3Cpath stroke='%238095b7' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm10 2-4.35-4.35'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+}
+
+/* Figma Search height 56px с учётом border 1px у строки: поле 54px (покой), 46px при padding 4+4 при фокусе в строке */
+.uk-widget__input {
+  width: 100%;
+  height: 54px;
+  min-height: 54px;
+  max-height: 54px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 0;
+  outline: none;
+  background: transparent !important;
+  font-family: var(--ukw-font);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: var(--ukw-text);
+  transition: none;
+}
+
+.uk-widget__input::placeholder {
+  color: #677188;
+  opacity: 1;
+}
+
+.uk-widget__search-row:focus-within .uk-widget__input::placeholder {
+  color: #8095b780;
+  opacity: 1;
+}
+
+/* Figma Component 27: иконка 20×20 — две линии border 2px #8095B7, rotate ±45° */
+.uk-widget__clear {
+  position: relative;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  color: transparent;
+  font-size: 0;
+  line-height: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  transition: opacity 0.15s ease, background 0.15s ease;
+}
+
+.uk-widget__clear::before,
+.uk-widget__clear::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 14px;
+  height: 0;
+  border-top: 2px solid var(--ukw-muted-soft);
+  transform-origin: center;
+  pointer-events: none;
+}
+
+.uk-widget__clear::before {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.uk-widget__clear::after {
+  transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+.uk-widget__clear:hover:not([hidden]),
+.uk-widget__clear:focus-visible:not([hidden]) {
+  background: rgba(128, 149, 183, 0.12);
+  border-radius: 4px;
+}
+
+.uk-widget__clear:focus-visible {
+  outline: none;
+}
+
+.uk-widget__clear[hidden] {
+  display: none !important;
+}
+
+.uk-widget__search-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  flex: 0 0 auto;
+}
+
+.uk-widget__search-row:focus-within .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)) {
+  gap: 10px;
+  width: 135px;
+  min-width: 135px;
+  flex: 0 0 135px;
+  height: 48px;
+  box-sizing: border-box;
+}
+
+.uk-widget__search-row:focus-within
+  .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)):not(:has(.uk-widget__clear:not([hidden]))) {
+  width: 105px;
+  min-width: 105px;
+  flex-basis: 105px;
+}
+
+.uk-widget__search-row:focus-within
+  .uk-widget__search-actions:not(:has(.uk-widget__button--secondary))
+  .uk-widget__button--primary {
+  width: 105px;
+  min-width: 105px;
+  max-width: 105px;
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
+  box-sizing: border-box;
+}
+
+/* Figma: Button — общая типографика; модификаторы --primary / --secondary (Frame 1948761990) */
+.uk-widget__button {
+  position: relative;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  font-family: var(--ukw-btn-font);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: var(--ukw-radius-field);
+  transition:
+    filter 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.uk-widget__button--primary {
+  align-self: center;
+  min-height: 48px;
+  height: 48px;
+  min-width: 42px;
+  width: auto;
+  padding: 14px 32px;
+  border: none;
+  color: #fff;
+  background: radial-gradient(94.25% 619.68% at 2.65% 100%, var(--ukw-btn-start) 0%, var(--ukw-btn-end) 100%);
+}
+
+.uk-widget__button--primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(94.25% 619.68% at 2.65% 100%, var(--ukw-btn-hover-start) 0%, var(--ukw-btn-hover-end) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.uk-widget__button--primary:hover:not(:disabled)::before,
+.uk-widget__button--primary:focus-visible::before {
+  opacity: 1;
+}
+
+.uk-widget__button--secondary {
+  height: 48px;
+  min-width: 42px;
+  padding: 0 32px;
+  border: 2px solid var(--ukw-secondary-border);
+  background: transparent;
+  color: var(--ukw-text);
+}
+
+.uk-widget__button--secondary:hover {
+  background: var(--ukw-surface-hover);
+  border-color: var(--ukw-muted-soft);
+}
+
+.uk-widget__button--secondary:focus-visible {
+  outline: 2px solid var(--ukw-primary);
+  outline-offset: 2px;
+}
+
+.uk-widget__search-actions:has(.uk-widget__button--secondary) .uk-widget__button--secondary {
+  height: 56px;
+  min-height: 56px;
+  width: 127px;
+  min-width: 127px;
+  max-width: 127px;
+  padding: 0 32px;
+  box-sizing: border-box;
+}
+
+.uk-widget__search-actions:has(.uk-widget__button--secondary) .uk-widget__button--primary {
+  height: 56px;
+  min-height: 56px;
+  width: 105px;
+  min-width: 105px;
+  max-width: 105px;
+  padding: 18px 32px;
+  box-sizing: border-box;
+}
+
+.uk-widget__button-label {
+  position: relative;
+  z-index: 1;
+}
+
+.uk-widget__section--main {
+  position: static;
+  margin-top: 0;
+  width: 100%;
+  max-width: 994px;
+  align-self: flex-end;
+  min-width: 0;
+  background: transparent;
+}
+
+.uk-widget__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.uk-widget__error {
+  padding: 16px 24px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--ukw-error);
+}
+
+.uk-widget__result[hidden],
+.uk-widget__error[hidden] {
+  display: none !important;
+}
+
+.uk-widget__result {
+  display: grid;
+  gap: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.uk-widget__suggest {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  width: 100%;
+  max-width: 100%;
+  margin-top: 0;
+  z-index: 20;
+  display: none;
+}
+
+.uk-widget__suggest,
+.uk-widget__suggest * {
+  font-family: var(--ukw-font);
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.uk-widget__suggest-list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  height: auto;
+  max-height: 184px;
+  padding: 4px;
+  background: var(--ukw-surface);
+  border: 1px solid rgba(128, 149, 183, 0.2);
+  border-radius: var(--ukw-radius-field);
+  box-shadow: 0 4px 20px rgba(29, 29, 29, 0.12);
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.uk-widget__suggest-list--scroll {
+  overflow-y: auto;
+}
+
+.uk-widget__suggest-list--empty {
+  height: 46px;
+  min-height: 46px;
+  max-height: 46px;
+  overflow-y: hidden;
+}
+
+.uk-widget__suggest-item {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  text-align: left;
+  min-height: 38px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #0f0f0f;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background 0.2s ease;
+}
+
+.uk-widget__suggest-item:hover,
+.uk-widget__suggest-item:focus,
+.uk-widget__suggest-item--active {
+  outline: none;
+  background: #f0f5f7;
+}
+
+.uk-widget__suggest-empty {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  background: transparent;
+}
+
+.uk-widget__suggest-empty-text {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 22px;
+  color: #8095b7;
+}
+
+.uk-widget__suggest-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.uk-widget__suggest-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.uk-widget__suggest-list::-webkit-scrollbar-thumb {
+  background: rgba(128, 149, 183, 0.5);
+  border-radius: 8px;
+}
+
+.uk-widget__highlight {
+  background: color-mix(in srgb, var(--ukw-blue) 22%, transparent);
+  font-weight: 600;
+  border-radius: 3px;
+  padding: 0 2px;
+  margin: 0 -1px;
+}
+
+.uk-widget__uk-card {
+  display: block;
+  width: 100%;
+  max-width: var(--ukw-card-max);
+  background: #fff;
+  box-shadow: 0 1px 19.5px rgba(29, 29, 29, 0.08);
+  border-radius: 10px;
+}
+
+.uk-widget__uk-card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 0;
+  padding: 24px 32px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.uk-widget__uk-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.uk-widget__uk-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.uk-widget__uk-section-divider {
+  width: 100%;
+  height: 0;
+  border: 0;
+  border-top: 1px solid rgba(128, 149, 183, 0.2);
+  margin: 0;
+}
+
+.uk-widget__uk-kicker {
+  font-family: var(--ukw-font);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: #677188;
+  margin-bottom: 8px;
+}
+
+.uk-widget__uk-name {
+  font-family: var(--ukw-heading-font);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 26px;
+  color: #0f0f0f;
+}
+
+.uk-widget__uk-table {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.uk-widget__uk-table--global-head {
+  width: 100%;
+}
+
+.uk-widget__uk-table-head,
+.uk-widget__uk-table-row {
+  display: grid;
+  grid-template-columns: 280px 164px 170px minmax(241px, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.uk-widget__uk-table-head {
+  padding: 8px 0 16px;
+}
+
+.uk-widget__uk-th {
+  font-family: var(--ukw-font);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+  color: #4d566d;
+}
+
+.uk-widget__uk-divider {
+  width: 100%;
+  border-top: 1px solid rgba(128, 149, 183, 0.2);
+}
+
+.uk-widget__uk-table-row {
+  padding: 16px 0;
+}
+
+.uk-widget__uk-cell {
+  font-family: var(--ukw-font);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: #0f0f0f;
+  word-break: break-word;
+}
+
+.uk-widget__uk-cell--contacts {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.uk-widget__uk-contact-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.uk-widget__uk-contact-field::before {
+  display: none;
+}
+
+.uk-widget__uk-cell--management {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.uk-widget__uk-management-person {
+  font-family: var(--ukw-font);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #0f0f0f;
+}
+
+.uk-widget__uk-management-position {
+  font-family: var(--ukw-font);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: 0;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #677188;
+}
+
+.uk-widget__uk-cell-value {
+  font-family: var(--ukw-font);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: #0f0f0f;
+  word-break: break-word;
+}
+
+.uk-widget__uk-cell-value:not(a) {
+  text-decoration: none;
+}
+
+.uk-widget__uk-empty-dash {
+  display: inline-block;
+  width: 164px;
+  min-height: 22px;
+  flex: none;
+  font-family: var(--ukw-font);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  font-feature-settings: "pnum" on, "lnum" on;
+  color: #0f0f0f;
+}
+
+/* Figma п.5: телефон и почта — #0A6CA6; у почты подчёркивание */
+.uk-widget .uk-widget__uk-cell--contacts .uk-widget__uk-phone,
+.uk-widget .uk-widget__uk-cell--contacts a.uk-widget__uk-cell-link {
+  color: #0a6ca6 !important;
+}
+
+.uk-widget .uk-widget__uk-cell--contacts .uk-widget__uk-phone {
+  width: 145px;
+  min-height: 22px;
+  flex: none;
+  font-family: var(--ukw-font);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  font-feature-settings: "pnum" on, "lnum" on;
+  text-decoration: none !important;
+}
+
+.uk-widget .uk-widget__uk-cell--contacts a.uk-widget__uk-email,
+.uk-widget .uk-widget__uk-cell--contacts a.uk-widget__uk-cell-link[href^="mailto:"] {
+  text-decoration: underline !important;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+}
+
+.uk-widget .uk-widget__uk-cell--contacts a.uk-widget__uk-cell-link[href^="tel:"] {
+  text-decoration: none !important;
+}
+
+.uk-widget .uk-widget__uk-cell--contacts a.uk-widget__uk-cell-link:hover,
+.uk-widget .uk-widget__uk-cell--contacts a.uk-widget__uk-cell-link:focus-visible {
+  color: #0a6ca6 !important;
+}
+
+@media (max-width: 767px) {
+  .uk-widget {
+    --ukw-pad-inline: 15px;
+    --ukw-pad-block: 20px;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* Исправления для подсказок на мобильных */
+  .uk-widget__suggest {
+    max-width: 100%;
+    align-self: stretch;
+  }
+
+  .uk-widget__suggest-list {
+    height: auto;
+    max-height: 220px;
+    border-radius: var(--ukw-radius-field);
+    box-shadow: 0 4px 20px rgba(29, 29, 29, 0.12);
+  }
+
+  .uk-widget__suggest-item {
+    font-size: 14px;
+    line-height: 20px;
+    padding: 10px 14px;
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .uk-widget__search-wrap {
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .uk-widget__search-top {
+    align-self: stretch;
+    max-width: none;
+  }
+
+  .uk-widget__section--main {
+    align-self: stretch;
+    max-width: none;
+  }
+
+  .uk-widget__heading {
+    font-size: 20px;
+    line-height: 26px;
+    max-width: 100%;
+  }
+
+  .uk-widget__search-row {
+    position: relative;
+    flex-direction: row;
+    align-items: center;
+    min-height: 0;
+    box-sizing: border-box;
+    padding: 4px 16px;
+    gap: 8px;
+    background: #F0F5F7;
+    border: 1px solid transparent;
+    border-radius: 8px;
+  }
+
+  /*
+   * Idle: «Поиск» только в .search-leading (лупа + текст).
+   * Поле input — невидимый оверлей для тапа, без своего placeholder.
+   * Active/focus: leading скрыт, «Поиск» только в placeholder input.
+   */
+  .uk-widget:not(.uk-widget--has-value) .uk-widget__search-row:not(:focus-within) .uk-widget__search-shell {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    flex: none;
+    width: auto;
+    min-width: 0;
+    opacity: 0;
+  }
+
+  .uk-widget:not(.uk-widget--has-value) .uk-widget__search-row:not(:focus-within) .uk-widget__search-leading {
+    position: relative;
+    z-index: 0;
+  }
+
+  .uk-widget:not(.uk-widget--has-value) .uk-widget__search-row:not(:focus-within) .uk-widget__input {
+    height: 100%;
+    min-height: 100%;
+    max-height: none;
+    cursor: text;
+  }
+
+  .uk-widget__search-row:focus-within,
+  .uk-widget--has-value .uk-widget__search-row {
+    background: #FFFFFF;
+    border: 1px solid #8095B7;
+    box-shadow: none;
+    border-radius: 12px;
+    padding: 4px 16px;
+    gap: 0;
+    justify-content: space-between;
+  }
+
+  .uk-widget__search-row:focus-within .uk-widget__search-leading,
+  .uk-widget--has-value .uk-widget__search-row .uk-widget__search-leading {
+    display: none !important;
+  }
+
+  .uk-widget__search-row:focus-within .uk-widget__search-shell,
+  .uk-widget--has-value .uk-widget__search-shell {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    opacity: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+    max-width: none;
+    margin: 0;
+  }
+
+  .uk-widget__search-row:focus-within .uk-widget__search-inner,
+  .uk-widget--has-value .uk-widget__search-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    height: 48px;
+    max-height: 48px;
+    padding: 0;
+    border-radius: 20px;
+    background: transparent;
+    border: none;
+  }
+
+  .uk-widget__search-row:focus-within .uk-widget__input,
+  .uk-widget--has-value .uk-widget__input {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    height: 22px;
+    min-height: 22px;
+    max-height: 22px;
+    padding: 0;
+    font-family: Inter, var(--ukw-font);
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+    font-feature-settings: "pnum" on, "lnum" on;
+    color: #0F0F0F;
+  }
+
+  .uk-widget__search-row:focus-within .uk-widget__input::placeholder {
+    color: #8095b780;
+    opacity: 1;
+  }
+
+  .uk-widget:not(.uk-widget--no-leading) .uk-widget__field--address::before {
+    display: none;
+  }
+
+  .uk-widget__search-leading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex: 0 0 auto;
+  }
+
+  .uk-widget__search-leading-icon {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    flex: 0 0 auto;
+  }
+
+  .uk-widget__search-leading-svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .uk-widget__search-leading-text {
+    display: inline;
+    color: #677188;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  .uk-widget__search-row:focus-within .uk-widget__search-leading-text,
+  .uk-widget--has-value .uk-widget__search-leading-text {
+    color: #0F0F0F;
+  }
+
+  .uk-widget__search-shell {
+    flex: 1 1 auto;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+  }
+
+  .uk-widget__search-shell:hover,
+  .uk-widget__search-shell:focus-within {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .uk-widget__search-inner {
+    min-height: 48px;
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+
+  .uk-widget:not(.uk-widget--has-value) .uk-widget__search-row:not(:focus-within) .uk-widget__input {
+    height: 48px;
+  }
+
+  .uk-widget__search-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 0 0 0;
+    width: 0;
+    min-width: 0;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .uk-widget__search-actions:has(.uk-widget__clear:not([hidden])) {
+    flex: 0 0 20px;
+    width: 20px;
+    min-width: 20px;
+    overflow: visible;
+  }
+
+  .uk-widget.uk-widget--has-value
+    .uk-widget__search-row:not(:focus-within)
+    .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)),
+  .uk-widget__search-row:focus-within
+    .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)) {
+    width: 0;
+    min-width: 0;
+    flex: 0 0 0;
+    height: 48px;
+  }
+
+  .uk-widget.uk-widget--has-value
+    .uk-widget__search-row:not(:focus-within)
+    .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)):has(.uk-widget__clear:not([hidden])),
+  .uk-widget__search-row:focus-within
+    .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)):has(.uk-widget__clear:not([hidden])) {
+    width: 20px;
+    min-width: 20px;
+    flex: 0 0 20px;
+  }
+
+  .uk-widget__button--primary,
+  .uk-widget__button--secondary {
+    display: none !important;
+  }
+
+  /* Figma Frame 1948763479: контейнер крестика 20×48, иконка 20×20 по центру */
+  .uk-widget__clear {
+    width: 20px;
+    height: 48px;
+    align-self: stretch;
+  }
+
+  /* Figma 375px: карточка УК — см. блок в конце файла (после ≤1024) */
+}
+
+/* Tilda: рост секции по контенту */
+.t-rec:has(.uk-widget),
+.t123:has(.uk-widget),
+[id^="rec"]:has(.uk-widget) {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.t-rec:has(.uk-widget) .t-container,
+.t-rec:has(.uk-widget) .t-container_100,
+.t-rec:has(.uk-widget) .t-width,
+.t-rec:has(.uk-widget) .t-col,
+.t123:has(.uk-widget) .t-container {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* Zero Block T396: снять фиксированную высоту artboard (251px) — иначе белая полоса под карточкой */
+.t-rec:has(.uk-widget) .t396__artboard,
+.t-rec:has(.uk-widget) .t396__filter,
+.t-rec:has(.uk-widget) .t396__carrier {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+.t-rec:has(.uk-widget) .tn-elem:has(.uk-widget),
+.t-rec:has(.uk-widget) .tn-elem:has(#uk-address-widget-mount),
+.t-rec:has(.uk-widget) .tn-atom:has(.uk-widget),
+.t-rec:has(.uk-widget) .tn-atom:has(#uk-address-widget-mount) {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* Мобильный дизайн под Figma (375px и ниже) */
+@media (max-width: 375px) {
+  .uk-widget {
+    max-width: 343px;
+    margin-inline: auto;
+  }
+
+  .uk-widget__search-wrap {
+    width: 343px;
+    max-width: 343px;
+    padding: 16px;
+    gap: 16px;
+    border-radius: 10px;
+    box-shadow: 0px 1px 19.5px rgba(29, 29, 29, 0.08);
+  }
+
+  .uk-widget__heading {
+    width: 311px;
+    max-width: 311px;
+    font-family: var(--ukw-heading-font);
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.3;
+  }
+
+  .uk-widget__search-row {
+    width: 311px;
+    max-width: 311px;
+    height: 56px;
+    min-height: 56px;
+    padding: 0 4px;
+    gap: 8px;
+  }
+}
+
+/* Responsive: ≥1440 wide-desktop | 1025–1439 desktop-1280 | 768–1024 tablet/iPad | ≤767 mobile */
+
+@media (max-width: 1439px) and (min-width: 1280px) {
+  .uk-widget {
+    --ukw-card-max: 824px;
+    --ukw-pad-inline: 24px;
+  }
+
+  .uk-widget__search-top,
+  .uk-widget__suggest {
+    max-width: 824px;
+  }
+
+  .uk-widget__section--main {
+    max-width: 824px;
+  }
+
+  .uk-widget.uk-widget--has-value .uk-widget__search-row:not(:focus-within) .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)),
+  .uk-widget__search-row:focus-within .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)) {
+    width: 120px;
+    min-width: 120px;
+    flex: 0 0 120px;
+  }
+
+  .uk-widget.uk-widget--has-value .uk-widget__search-row:not(:focus-within) .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)) .uk-widget__button--primary,
+  .uk-widget__search-row:focus-within .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)) .uk-widget__button--primary {
+    width: 95px;
+    min-width: 95px;
+    max-width: 95px;
+  }
+}
+
+@media (max-width: 1279px) and (min-width: 768px) {
+  .uk-widget {
+    --ukw-card-max: 880px;
+    --ukw-pad-inline: 20px;
+    --ukw-pad-block: 24px;
+  }
+
+  .uk-widget__search-top,
+  .uk-widget__suggest {
+    max-width: 820px;
+  }
+
+  .uk-widget__section--main {
+    max-width: 880px;
+  }
+
+  .uk-widget__heading {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
+  .uk-widget.uk-widget--has-value .uk-widget__search-row:not(:focus-within) .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)),
+  .uk-widget__search-row:focus-within .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)) {
+    width: 110px;
+    min-width: 110px;
+    flex: 0 0 110px;
+  }
+
+  .uk-widget.uk-widget--has-value .uk-widget__search-row:not(:focus-within) .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)) .uk-widget__button--primary,
+  .uk-widget__search-row:focus-within .uk-widget__search-actions:not(:has(.uk-widget__button--secondary)) .uk-widget__button--primary {
+    width: 88px;
+    min-width: 88px;
+    max-width: 88px;
+  }
+
+  .uk-widget__uk-table {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .uk-widget {
+    --ukw-card-max: 100%;
+    --ukw-pad-inline: 16px;
+    --ukw-pad-block: 20px;
+  }
+
+  .uk-widget__search-top,
+  .uk-widget__suggest,
+  .uk-widget__section--main {
+    max-width: 100%;
+    align-self: stretch;
+  }
+
+  .uk-widget__search-wrap {
+    align-items: stretch;
+  }
+
+  /* Stacked card: tablet (768+) and mobile (≤767) */
+  .uk-widget__uk-card-inner {
+    min-height: 0;
+    gap: 16px;
+  }
+
+  .uk-widget__uk-stack {
+    gap: 16px;
+  }
+
+  .uk-widget__uk-section-divider {
+    margin: 0;
+  }
+
+  .uk-widget__uk-card {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: none;
+  }
+
+  .uk-widget__uk-kicker {
+    display: none;
+  }
+
+  /* Stack: название УК у каждого блока (Manrope 16/26), без kicker сверху карточки */
+  .uk-widget__uk-name {
+    font-family: var(--ukw-heading-font);
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 26px;
+    color: #0f0f0f;
+  }
+
+  .uk-widget__uk-table {
+    font-size: 14px;
+    line-height: 22px;
+    gap: 0;
+  }
+
+  .uk-widget__uk-table-head {
+    display: none;
+  }
+
+  .uk-widget__uk-table--global-head {
+    display: none;
+  }
+
+  .uk-widget__uk-table .uk-widget__uk-divider {
+    display: none;
+  }
+
+  .uk-widget__uk-table-row {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 0;
+    border: 0;
+  }
+
+  .uk-widget__uk-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+    padding: 0;
+    font-weight: 500;
+    color: #0f0f0f;
+    font-size: 14px;
+    line-height: 22px;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  .uk-widget__uk-cell::before {
+    content: attr(data-label);
+    display: block;
+    width: 100%;
+    font-family: Inter, var(--ukw-font);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0;
+    font-feature-settings: "pnum" on, "lnum" on;
+    color: #4d566d;
+    margin-bottom: 0;
+  }
+
+  .uk-widget__uk-cell--contacts {
+    gap: 16px;
+  }
+
+  .uk-widget__uk-cell--contacts::before {
+    display: none;
+  }
+
+  .uk-widget__uk-contact-field {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .uk-widget__uk-contact-field::before {
+    content: attr(data-label);
+    display: block;
+    width: 100%;
+    font-family: Inter, var(--ukw-font);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0;
+    font-feature-settings: "pnum" on, "lnum" on;
+    color: #4d566d;
+  }
+
+  .uk-widget__uk-cell--management {
+    gap: 0;
+  }
+
+  .uk-widget__uk-cell--management::before {
+    margin-bottom: 8px;
+  }
+
+  .uk-widget__uk-management-person {
+    margin-bottom: 4px;
+  }
+
+  .uk-widget__uk-cell[data-label="График работы"] {
+    line-height: 22px;
+  }
+
+  .uk-widget__uk-cell[data-label="График работы"] br {
+    margin-bottom: 0;
+  }
+
+  .uk-widget__uk-cell-link {
+    padding: 2px 0;
+    display: inline-block;
+    min-height: 24px;
+  }
+}
+
+/* Figma desktop ≥1025: global table head, без kicker */
+@media (min-width: 1025px) {
+  .uk-widget__uk-kicker {
+    display: none;
+  }
+
+  .uk-widget__uk-table--global-head {
+    display: flex;
+  }
+}
+
+/* Figma 1280 artboard (1025–1439): card 824px, padding 24px, cols 220/164/170/150+ */
+@media (min-width: 1025px) and (max-width: 1439px) {
+  .uk-widget {
+    --ukw-card-max: 824px;
+  }
+
+  .uk-widget__search-top,
+  .uk-widget__suggest,
+  .uk-widget__section--main {
+    max-width: 824px;
+  }
+
+  .uk-widget__uk-card {
+    max-width: 824px;
+  }
+
+  .uk-widget__uk-card-inner {
+    padding: 24px;
+    gap: 16px;
+  }
+
+  .uk-widget__uk-stack {
+    gap: 16px;
+  }
+
+  .uk-widget__uk-block {
+    gap: 16px;
+  }
+
+  .uk-widget__uk-table-head,
+  .uk-widget__uk-table-row {
+    grid-template-columns: 220px 164px 170px minmax(150px, 1fr);
+  }
+}
+
+/* Figma wide desktop ≥1440: padding 32px, cols 280/164/170/241+ */
+@media (min-width: 1440px) {
+  .uk-widget__uk-card-inner {
+    padding: 32px;
+    gap: 24px;
+  }
+
+  .uk-widget__uk-stack {
+    gap: 24px;
+  }
+
+  .uk-widget__uk-block {
+    gap: 24px;
+  }
+
+  .uk-widget__uk-table-head,
+  .uk-widget__uk-table-row {
+    grid-template-columns: 280px 164px 170px minmax(241px, 1fr);
+  }
+}
+
+/* Figma desktop single UK: padding 24px 32px, cols 280/164/170/241+ */
+@media (min-width: 1025px) {
+  .uk-widget__uk-card--single .uk-widget__uk-card-inner {
+    padding: 24px 32px;
+    gap: 24px;
+  }
+
+  .uk-widget__uk-card--single .uk-widget__uk-block {
+    gap: 24px;
+  }
+
+  .uk-widget__uk-card--single .uk-widget__uk-table-head,
+  .uk-widget__uk-card--single .uk-widget__uk-table-row {
+    grid-template-columns: 280px 164px 170px minmax(241px, 1fr);
+  }
+}
+
+/* Tablet / iPad Pro ≤1024: card 945px, padding 24px */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .uk-widget {
+    --ukw-card-max: 945px;
+  }
+
+  .uk-widget__search-top,
+  .uk-widget__suggest,
+  .uk-widget__section--main {
+    max-width: 945px;
+  }
+
+  .uk-widget__uk-card {
+    max-width: 945px;
+  }
+
+  .uk-widget__uk-card-inner {
+    padding: 24px;
+  }
+
+  .uk-widget__uk-block {
+    gap: 16px;
+  }
+}
+
+/* Figma 375px artboard: padding 16px, между полями 16px */
+@media (max-width: 767px) {
+  .uk-widget__uk-card-inner {
+    padding: 16px;
+  }
+
+  .uk-widget__uk-block {
+    gap: 16px;
+  }
+}
+

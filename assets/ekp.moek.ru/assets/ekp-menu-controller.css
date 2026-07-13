@@ -1,0 +1,30 @@
+/* Active state for menu triggers (matches Tilda T123 styles) */
+[class*="menu1_"].active-menu,
+[class*="menu2_"].active-menu,
+[class*="menu3_"].active-menu {
+  background-color: rgba(239, 246, 251, 1);
+  border-radius: 8px;
+}
+
+[class*="menu1_"].active-menu *,
+[class*="menu2_"].active-menu *,
+[class*="menu3_"].active-menu * {
+  color: #0a6ca6 !important;
+}
+
+[class*="ux-menu1_"],
+[class*="ux-yk-menu1_"],
+[class*="ux-so-menu1_"] {
+  cursor: pointer !important;
+  user-select: none;
+}
+
+[class*="ux-menu1_"] *,
+[class*="ux-yk-menu1_"] *,
+[class*="ux-so-menu1_"] * {
+  cursor: pointer !important;
+}
+
+#remote-tilda-iframe {
+  border: none;
+}

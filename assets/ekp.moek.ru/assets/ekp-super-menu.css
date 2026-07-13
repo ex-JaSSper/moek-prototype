@@ -1,0 +1,51 @@
+/* Overlay-панели header (замена Annexx ANX015) — см. docs/header-anx015-panels.json */
+#rec1341410431:not(.ekp-super-menu-open),
+#rec1341410441:not(.ekp-super-menu-open),
+#rec1341410451:not(.ekp-super-menu-open),
+#rec1341410461:not(.ekp-super-menu-open),
+#rec1341410471:not(.ekp-super-menu-open),
+#rec1341410481:not(.ekp-super-menu-open),
+#rec1341410491:not(.ekp-super-menu-open),
+#rec1341410501:not(.ekp-super-menu-open),
+#rec1341410531:not(.ekp-super-menu-open),
+#rec1341410541:not(.ekp-super-menu-open) {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+#rec1341410431.ekp-super-menu-open,
+#rec1341410441.ekp-super-menu-open,
+#rec1341410451.ekp-super-menu-open,
+#rec1341410461.ekp-super-menu-open,
+#rec1341410471.ekp-super-menu-open,
+#rec1341410481.ekp-super-menu-open,
+#rec1341410491.ekp-super-menu-open,
+#rec1341410501.ekp-super-menu-open,
+#rec1341410531.ekp-super-menu-open,
+#rec1341410541.ekp-super-menu-open {
+  display: block !important;
+  pointer-events: auto !important;
+}
+
+#ekp-super-menu-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999998;
+  background: transparent;
+  pointer-events: none;
+}
+
+#ekp-super-menu-backdrop.ekp-super-menu-backdrop-visible {
+  display: block;
+  pointer-events: auto;
+}
+
+html.ekp-super-menu-locked,
+html.ekp-super-menu-locked body {
+  overflow: hidden !important;
+}
+
+.ekp-super-menu-trigger {
+  cursor: pointer !important;
+}
