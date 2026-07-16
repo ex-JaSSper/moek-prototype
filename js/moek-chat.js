@@ -8,10 +8,12 @@
   + Новый формат ответа: чистый HTML + маркер ###SUGGESTIONS### +
     3 вопроса построчно. JSON-обёртка {"output":...} больше не нужна
     (но легаси-JSON на фоллбэке всё ещё распознаётся).
+  + Модель зафиксирована: Qwen3 Next 80B (по итогам red-team тестов и
+    замеров скорости — фаворит). Селектор моделей убран из UI.
   − Удалены: extractAnswer, answerFields, ackMessage (при стриминге
     первые токены сами служат подтверждением).
   Сохранено: история диалога между страницами, зеркальные ссылки,
-  подсветка текста на странице, голосовой ввод, селектор моделей,
+  подсветка текста на странице, голосовой ввод,
   экранирование от навигационного перехватчика Tilda.
 */
 (function () {
@@ -31,15 +33,8 @@
       "Что такое прямой договор?"
     ],
 
-    // ── Селектор моделей: выбранная уходит на вебхук в поле model ──
-    models: [
-      { id: "z-ai/glm-4.5-air",                 label: "GLM 4.5 Air" },
-      { id: "qwen/qwen3-next-80b-a3b-instruct", label: "Qwen3 Next 80B" },
-      { id: "z-ai/glm-4.6",                     label: "GLM 4.6" },
-      { id: "qwen/qwen3-235b-a22b-2507",        label: "Qwen3 235B" },
-      { id: "z-ai/glm-4.5",                     label: "GLM 4.5" }
-    ],
-    defaultModel: "z-ai/glm-4.5-air",
+    // ── Модель зафиксирована и уходит на вебхук в поле model ──
+    model: "qwen/qwen3-next-80b-a3b-instruct",
 
     // ── Ссылки бота ведут на ЗЕРКАЛО (текущий хост), а не на живой сайт ──
     mirrorLinks: true,
@@ -80,17 +75,10 @@
   }
   var SESSION_ID = getSessionId();
 
-  // ══════════ ВЫБРАННАЯ МОДЕЛЬ ══════════
-  function getModel() {
-    var m = null;
-    try { m = sessionStorage.getItem("moek_chat_model"); } catch (e) {}
-    var known = CONFIG.models.some(function (x) { return x.id === m; });
-    return known ? m : CONFIG.defaultModel;
-  }
-  function setModel(id) {
-    try { sessionStorage.setItem("moek_chat_model", id); } catch (e) {}
-  }
-  var CURRENT_MODEL = getModel();
+  // ══════════ ЗАФИКСИРОВАННАЯ МОДЕЛЬ ══════════
+  // Выбор модели убран: отвечает только Qwen3 Next 80B (быстрее всех
+  // по TTFT и стабильно проходит red-team тесты).
+  var CURRENT_MODEL = CONFIG.model;
 
   // ══════════ ССЫЛКА НА ЗЕРКАЛО + ПОДСВЕТКА ТЕКСТА ══════════
   function stripTags(html) {
@@ -321,11 +309,6 @@
     + ".moek-pill{background:" + C.surface + ";border:1px solid #d8e0e8;color:" + C.primary + ";padding:9px 14px;border-radius:12px;font-size:13px;line-height:1.35;cursor:pointer;text-align:left;font-family:inherit;font-weight:500;transition:background .2s,border-color .2s,transform .1s;}"
     + ".moek-pill:hover{background:#f0f6fb;border-color:" + C.primary + ";}"
     + ".moek-pill:active{transform:scale(.985);}"
-    + "#moek-chat-modelbar{display:flex;align-items:center;gap:8px;padding:8px 14px 0;background:" + C.surface + ";}"
-    + "#moek-chat-modelbar label{font-size:11.5px;color:" + C.sub + ";white-space:nowrap;}"
-    + "#moek-chat-model{flex:1;min-width:0;height:30px;border:1px solid #dce3ea;border-radius:8px;background:" + C.surface + ";color:" + C.text + ";font-size:12.5px;font-family:inherit;padding:0 8px;outline:none;cursor:pointer;transition:border-color .2s;}"
-    + "#moek-chat-model:focus{border-color:" + C.primary + ";}"
-    + "#moek-chat-model:disabled{background:" + C.botBg + ";color:#aab4c0;cursor:default;}"
     + "#moek-chat-foot{display:flex;align-items:flex-end;gap:8px;padding:12px 14px;border-top:1px solid " + C.line + ";background:" + C.surface + ";}"
     + "#moek-chat-input{flex:1;box-sizing:border-box;height:42px;border:1px solid #dce3ea;border-radius:12px;padding:10px 14px;font-size:14px;line-height:1.4;font-family:inherit;color:" + C.text + ";outline:none;resize:none;overflow-y:auto;white-space:pre-wrap;word-wrap:break-word;transition:border-color .2s,box-shadow .2s;}"
     + "#moek-chat-input::placeholder{color:#aab4c0;}"
@@ -370,14 +353,6 @@
         '<button id="moek-chat-close" aria-label="Закрыть">' + ICON.close + '</button>' +
       '</div>' +
       '<div id="moek-chat-body"></div>' +
-      '<div id="moek-chat-modelbar">' +
-        '<label for="moek-chat-model">Модель</label>' +
-        '<select id="moek-chat-model" aria-label="Выбор модели">' +
-          CONFIG.models.map(function (m) {
-            return '<option value="' + m.id + '"' + (m.id === CURRENT_MODEL ? ' selected' : '') + '>' + m.label + '</option>';
-          }).join('') +
-        '</select>' +
-      '</div>' +
       '<div id="moek-chat-foot">' +
         '<button class="moek-ico-btn" id="moek-chat-mic" aria-label="Голосовое сообщение">' + ICON.mic + '</button>' +
         '<textarea id="moek-chat-input" rows="1" placeholder="' + CONFIG.placeholder + '"></textarea>' +
@@ -416,12 +391,6 @@
   var input = win.querySelector("#moek-chat-input");
   var sendBtn = win.querySelector("#moek-chat-send");
   var micBtn = win.querySelector("#moek-chat-mic");
-  var modelSel = win.querySelector("#moek-chat-model");
-
-  modelSel.addEventListener("change", function () {
-    CURRENT_MODEL = this.value;
-    setModel(CURRENT_MODEL);
-  });
 
   var busy = false, greeted = false;
   var miniAva = '<div class="mini">' + ICON.logo.replace('width="44" height="44"', 'width="26" height="26"') + '</div>';
@@ -451,7 +420,6 @@
 
   function setBusy(v) {
     busy = v; input.disabled = v; sendBtn.disabled = v; micBtn.disabled = v;
-    if (modelSel) modelSel.disabled = v;
     if (!v) input.focus();
   }
   function clearSuggestions() {
