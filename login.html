@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="robots" content="noindex, nofollow"/>
+<title>Вход — МОЭК Онлайн</title>
+<link rel="icon" type="image/png" href="/assets/ekp.moek.ru/images/tild3639-6265-4162-a536-653733666231__favicon.png"/>
+<style>
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+    background: linear-gradient(135deg, #0a3d91 0%, #1657c4 100%);
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px; color: #1a1a1a;
+  }
+  .card {
+    background: #fff; width: 100%; max-width: 380px;
+    border-radius: 16px; padding: 36px 32px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  }
+  .brand { text-align: center; margin-bottom: 24px; }
+  .brand .logo {
+    font-size: 26px; font-weight: 800; letter-spacing: .5px; color: #0a3d91;
+  }
+  .brand .sub { font-size: 13px; color: #6b7280; margin-top: 4px; }
+  label { display: block; font-size: 13px; font-weight: 600; color: #374151; margin: 16px 0 6px; }
+  input {
+    width: 100%; padding: 12px 14px; font-size: 15px;
+    border: 1.5px solid #d1d5db; border-radius: 10px; outline: none;
+    transition: border-color .15s;
+  }
+  input:focus { border-color: #1657c4; }
+  button {
+    width: 100%; margin-top: 24px; padding: 13px;
+    font-size: 15px; font-weight: 700; color: #fff;
+    background: #1657c4; border: none; border-radius: 10px; cursor: pointer;
+    transition: background .15s;
+  }
+  button:hover { background: #0a3d91; }
+  button:disabled { opacity: .6; cursor: default; }
+  .error {
+    display: none; margin-top: 16px; padding: 10px 12px;
+    background: #fef2f2; color: #b91c1c; font-size: 13px;
+    border-radius: 8px; border: 1px solid #fecaca; text-align: center;
+  }
+  .error.show { display: block; }
+</style>
+</head>
+<body>
+  <form class="card" id="loginForm" autocomplete="off">
+    <div class="brand">
+      <div class="logo">МОЭК Онлайн</div>
+      <div class="sub">Доступ к порталу</div>
+    </div>
+    <label for="login">Логин</label>
+    <input type="text" id="login" name="login" autocomplete="username" autofocus/>
+    <label for="password">Пароль</label>
+    <input type="password" id="password" name="password" autocomplete="current-password"/>
+    <button type="submit" id="submitBtn">Войти</button>
+    <div class="error" id="error">Неверный логин или пароль</div>
+  </form>
+
+<script>
+// Компактная реализация SHA-256 (работает и локально по file://, без интернета).
+var sha256=(function(){function r(a,b){return a>>>b|a<<32-b}return function(a){var b=new TextEncoder().encode(a),c=[1116352408,1899447441,3049323471,3921009573,961987163,1508970993,2453635748,2870763221,3624381080,310598401,607225278,1426881987,1925078388,2162078206,2614888103,3248222580,3835390401,4022224774,264347078,604807628,770255983,1249150122,1555081692,1996064986,2554220882,2821834349,2952996808,3210313671,3336571891,3584528711,113926993,338241895,666307205,773529912,1294757372,1396182291,1695183700,1986661051,2177026350,2456956037,2730485921,2820302411,3259730800,3345764771,3516065817,3600352804,4094571909,275423344,430227734,506948616,659060556,883997877,958139571,1322822218,1537002063,1747873779,1955562222,2024104815,2227730452,2361852424,2428436474,2756734187,3204031479,3329325298],d=[1779033703,3144134277,1013904242,2773480762,1359893119,2600822924,528734635,1541459225],e=b.length,f=e+8>>6;f=(f+1<<6);var g=new Uint8Array(f);g.set(b);g[e]=128;var h=e*8;g[f-1]=h&255;g[f-2]=h>>>8&255;g[f-3]=h>>>16&255;g[f-4]=h>>>24&255;var w=new Int32Array(64);for(var i=0;i<f;i+=64){for(var t=0;t<16;t++)w[t]=g[i+t*4]<<24|g[i+t*4+1]<<16|g[i+t*4+2]<<8|g[i+t*4+3];for(t=16;t<64;t++){var s0=r(w[t-15],7)^r(w[t-15],18)^w[t-15]>>>3,s1=r(w[t-2],17)^r(w[t-2],19)^w[t-2]>>>10;w[t]=w[t-16]+s0+w[t-7]+s1|0}var a=d[0],bb=d[1],cc=d[2],dd=d[3],ee=d[4],ff=d[5],gg=d[6],hh=d[7];for(t=0;t<64;t++){var S1=r(ee,6)^r(ee,11)^r(ee,25),ch=ee&ff^~ee&gg,t1=hh+S1+ch+c[t]+w[t]|0,S0=r(a,2)^r(a,13)^r(a,22),mj=a&bb^a&cc^bb&cc,t2=S0+mj|0;hh=gg;gg=ff;ff=ee;ee=dd+t1|0;dd=cc;cc=bb;bb=a;a=t1+t2|0}d[0]=d[0]+a|0;d[1]=d[1]+bb|0;d[2]=d[2]+cc|0;d[3]=d[3]+dd|0;d[4]=d[4]+ee|0;d[5]=d[5]+ff|0;d[6]=d[6]+gg|0;d[7]=d[7]+hh|0}var o='';for(i=0;i<8;i++)o+=('00000000'+(d[i]>>>0).toString(16)).slice(-8);return o}})();
+
+// Секрет хранится только как SHA-256(salt:login:password) — сам пароль в коде не лежит.
+var SALT='zt5GydUEFZKw9qEj';
+var EXPECT='8eacc6e78d0e34919164e36fc78660ef4946c117085ab4aa8fe482e445ac2740';
+
+// Если уже авторизован — сразу на главную.
+try{ if(sessionStorage.getItem('moek_gate')===EXPECT){ location.replace('index.html'); } }catch(e){}
+
+document.getElementById('loginForm').addEventListener('submit', function(ev){
+  ev.preventDefault();
+  var login=document.getElementById('login').value.trim();
+  var pass=document.getElementById('password').value;
+  var errEl=document.getElementById('error');
+  var hash=sha256(SALT+':'+login+':'+pass);
+  if(hash===EXPECT){
+    try{ sessionStorage.setItem('moek_gate', EXPECT); }catch(e){}
+    location.replace('index.html');
+  } else {
+    errEl.classList.add('show');
+    document.getElementById('password').value='';
+    document.getElementById('password').focus();
+  }
+});
+</script>
+</body>
+</html>
